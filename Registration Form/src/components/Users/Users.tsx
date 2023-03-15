@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import classes from './Users.module.css';
 
 interface IFormU {
   [key: string]: string;
@@ -36,18 +35,31 @@ function Users() {
   };
 
   return (
-    <section>
-      <h2>USERS</h2>
-      <div className={classes.users}>
-        {users?.map((el) => (
-          <ul key={el.id}>
-            <li className="bg-lime-50 inline-block  border-gray-500 border-b-2">
-              Name: {el.firstName} {el.lastName}
-            </li>
-            <li>Email: {el.email}</li>
-          </ul>
-        ))}
-      </div>
+    <section className="mt-12 pt-2">
+      <h2 className=" mb-8 text-center text-5xl font-bold tracking-widest text-[#2fceac]  drop-shadow-[3px_1px_#5e8274]">
+        USERS
+      </h2>
+      <table className="w-[35rem] table-fixed bg-[#a5e1d4] text-gray-900">
+        <thead>
+          <tr className="bg-emerald-100 tracking-widest text-gray-900">
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users?.map((el) => (
+            <tr
+              key={el.id}
+              className="font-medium tracking-wide odd:bg-[#2fceac]"
+            >
+              <td className="h-14 border-2 text-center drop-shadow-[0_35px_35px_#f46cdd]">
+                {el.firstName} {el.lastName}
+              </td>
+              <td className="h-14 border-2 text-center">{el.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 }

@@ -15,12 +15,11 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <div className="bg-[#25362f] p-0"> */}
       <Layout>
         <Form toggle={toggleShowUsers} show={showUsers} />
         {showUsers && <Users />}
+        {/* <Users /> */}
       </Layout>
-      {/* </div> */}
     </QueryClientProvider>
   );
 }

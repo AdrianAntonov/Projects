@@ -79,7 +79,7 @@ function Form({ toggle, show }: TToggle) {
                 message: 'Email is not valid!',
               },
             })}
-            className="border-b-2 border-gray-500 bg-[#2fceac] "
+            className="border-b-2 border-gray-500 bg-[#2fceac] focus:outline-none "
           />
 
           {errors.email && (
@@ -106,14 +106,14 @@ function Form({ toggle, show }: TToggle) {
           )}
           {errors.password?.type === 'checkLength' && (
             <p className="text-[10px] text-orange-700">
-              Password should be at least 6 characters and maximum 7 characters
+              Password should be at least 4 characters and maximum 7 characters
             </p>
           )}
         </div>
         <div className="flex justify-center ">
           <button
             type="submit"
-            className="mt-6 h-10 w-10/12 rounded-2xl bg-gradient-to-t from-[#5e8274] via-[#a5e1d4] to-[#b3ece0] font-bold tracking-widest duration-300 hover:-translate-y-[2px] hover:shadow-[0px_20px_30px_-11px_#1a1c1f]"
+            className="mt-6 h-10 w-10/12 rounded-3xl bg-gradient-to-t from-[#5e8274] via-[#a5e1d4] to-[#b3ece0] font-bold tracking-widest duration-300 hover:-translate-y-[2px] hover:shadow-[0px_20px_30px_-11px_#1a1c1f]"
           >
             Submit
           </button>
@@ -132,13 +132,3 @@ function Form({ toggle, show }: TToggle) {
 }
 
 export default Form;
-
-{
-  /* box-shadow: rgba(31, 35, 65, 0.37) 0px 20px 30px -11px;
-transform: translate(0px, -5px);
-color: rgb(255, 255, 255);
-text-decoration: none; */
-}
-{
-  /* bg-gradient-to-t from-[#25362f] to-lime-700 */
-}
