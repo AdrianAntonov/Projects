@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import { axios } from '../../utils/axios/axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import classes from './Form.module.css';
 
 export interface IForm {
   firstName: string;
@@ -26,11 +25,7 @@ function Form({ toggle, show }: TToggle) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (user: IForm) =>
-      axios.post(
-        'https://registration-form-bd9a1-default-rtdb.firebaseio.com/users.json',
-        user
-      ),
+    mutationFn: (user: IForm) => axios.post('/users.json', user),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
   });
 
@@ -44,31 +39,31 @@ function Form({ toggle, show }: TToggle) {
   };
 
   return (
-    <section className="h-auto w-[25rem] bg-[#2fceac] px-8 pt-12 font-medium tracking-wider ">
+    <section className="h-auto w-[25rem] bg-[#2fceac] px-8 pt-12 font-medium tracking-wider xs:w-full ">
       <form
         onSubmit={handleSubmit(onSubmitForm)}
         autoComplete="off"
         className=" flex flex-col space-y-4 pb-12"
       >
-        <div className=" flex justify-between text-gray-900">
+        <div className="form-input-container">
           <label className="">First Name</label>
           <input
             {...register('firstName', {
               required: true,
             })}
-            className="border-b-2 border-gray-500 bg-[#2fceac] focus:outline-none"
+            className="form-input xs:w-full"
           />
         </div>
-        <div className=" flex justify-between text-gray-900">
+        <div className="form-input-container">
           <label>Last Name</label>
           <input
             {...register('lastName', {
               required: true,
             })}
-            className="border-b-2 border-gray-500 bg-[#2fceac] focus:outline-none"
+            className="form-input xs:w-full"
           />
         </div>
-        <div className=" flex flex-wrap items-baseline justify-between text-gray-900">
+        <div className="form-input-container">
           <label>Email</label>
           <input
             type="text"
@@ -79,16 +74,14 @@ function Form({ toggle, show }: TToggle) {
                 message: 'Email is not valid!',
               },
             })}
-            className="border-b-2 border-gray-500 bg-[#2fceac] focus:outline-none "
+            className="form-input xs:w-full"
           />
 
           {errors.email && (
-            <p className="text-[10px] text-orange-700">
-              {errors.email?.message}
-            </p>
+            <p className="form-error">{errors.email?.message}</p>
           )}
         </div>
-        <div className="flex flex-wrap justify-between text-gray-900">
+        <div className="form-input-container">
           <label>Password</label>
           <input
             type="password"
@@ -98,14 +91,14 @@ function Form({ toggle, show }: TToggle) {
                 checkLength: (value) => value.length > 3 && value.length < 8,
               },
             })}
-            className="border-b-2 border-gray-500 bg-[#2fceac] focus:outline-none"
+            className="form-input xs:w-full"
           />
 
           {errors.password?.type === 'required' && (
-            <p className="text-[10px] text-orange-700">Password is required!</p>
+            <p className="form-error">Password is required!</p>
           )}
           {errors.password?.type === 'checkLength' && (
-            <p className="text-[10px] text-orange-700">
+            <p className="form-error">
               Password should be at least 4 characters and maximum 7 characters
             </p>
           )}
@@ -113,15 +106,15 @@ function Form({ toggle, show }: TToggle) {
         <div className="flex justify-center ">
           <button
             type="submit"
-            className="mt-6 h-10 w-10/12 rounded-3xl bg-gradient-to-t from-[#5e8274] via-[#a5e1d4] to-[#b3ece0] font-bold tracking-widest duration-300 hover:-translate-y-[2px] hover:shadow-[0px_20px_30px_-11px_#1a1c1f]"
+            className="form-btn mt-6 h-10 w-10/12 rounded-3xl xs:w-full xs:rounded-none xs:text-xs"
           >
-            Submit
+            SUBMIT
           </button>
         </div>
       </form>
       <div className="flex  items-center">
         <button
-          className="mb-6 h-10 w-full rounded-2xl bg-gradient-to-t from-[#5e8274] via-[#a5e1d4] to-[#b3ece0] font-bold tracking-widest duration-300 hover:-translate-y-[2px] hover:shadow-[0px_20px_30px_-11px_#1a1c1f] "
+          className="form-btn mb-6 h-10 w-full rounded-2xl xs:w-full xs:rounded-none xs:text-xs"
           onClick={handleShowUsers}
         >
           {show ? 'HIDE' : 'SHOW'} USERS

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { axios } from '../../utils/axios/axios';
+import Loader from '../../utils/loader';
 
 interface IFormU {
   [key: string]: string;
@@ -8,12 +10,9 @@ interface IFormU {
 function Users() {
   const [users, setUsers] = useState<IFormU[]>();
 
-  const { data } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ['users'],
-    queryFn: () =>
-      fetch(
-        'https://registration-form-bd9a1-default-rtdb.firebaseio.com/users.json'
-      ).then((response) => response.json()),
+    queryFn: () => axios.get('/users.json').then((res) => res.data),
 
     onSuccess(data: any) {
       transformedData(data);
@@ -34,16 +33,20 @@ function Users() {
     setUsers(trans);
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <section className="mt-12 pt-2">
-      <h2 className=" mb-8 text-center text-5xl font-bold tracking-widest text-[#2fceac]  drop-shadow-[3px_1px_#5e8274]">
+    <section className="mt-12 pt-2 us:w-full">
+      <h2 className=" mb-8 text-center text-5xl font-bold tracking-widest text-[#2fceac] drop-shadow-[3px_1px_#5e8274]">
         USERS
       </h2>
-      <table className="w-[35rem] table-fixed bg-[#a5e1d4] text-gray-900">
+      <table className="w-[35rem] table-fixed border-collapse bg-[#a5e1d4] text-gray-900 us:w-full us:text-sm">
         <thead>
-          <tr className="bg-emerald-100 tracking-widest text-gray-900">
-            <th>Name</th>
-            <th>Email</th>
+          <tr className="h-12 tracking-widest text-gray-900">
+            <th className="border-2">Name</th>
+            <th className="border-2">Email</th>
           </tr>
         </thead>
         <tbody>
