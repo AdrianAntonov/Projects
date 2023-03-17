@@ -83,7 +83,7 @@ function Form({ toggle, show }: TToggle) {
           <input
             type="text"
             {...register('email', {
-              required: 'Please insert your email!',
+              required: 'Email required!',
               pattern: {
                 value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                 message: 'Email is not valid!',

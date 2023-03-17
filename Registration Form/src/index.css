@@ -23,7 +23,7 @@ body {
 }
 
 .form-error {
-  @apply text-[10px] text-orange-700;
+  @apply mr-12 text-[10px] -tracking-tighter text-orange-700;
 }
 
 .form-screen {
