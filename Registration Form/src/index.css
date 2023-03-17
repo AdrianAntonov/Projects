@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  @apply bg-gradient-radial from-[#25362f] via-[#2e493e] to-[#385247];
 }
 
 @layer components {

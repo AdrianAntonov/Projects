@@ -1,44 +1,30 @@
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { axios } from '../../utils/axios/axios';
 import Loader from '../../utils/loader';
+import { useTransformedData } from '../../hooks/userTransform';
 
 interface IFormU {
   [key: string]: string;
 }
 
 function Users() {
-  const [users, setUsers] = useState<IFormU[]>();
+  const [users, setUsers] = useTransformedData([]);
 
   const { isLoading } = useQuery({
     queryKey: ['users'],
     queryFn: () => axios.get('/users.json').then((res) => res.data),
 
-    onSuccess(data: any) {
-      transformedData(data);
+    onSuccess: (data: any) => {
+      setUsers(data);
     },
   });
-
-  const transformedData = (data: any) => {
-    const trans = [];
-
-    for (let key in data) {
-      trans.push({
-        id: key,
-        firstName: data[key].firstName,
-        lastName: data[key].lastName,
-        email: data[key].email,
-      });
-    }
-    setUsers(trans);
-  };
 
   if (isLoading) {
     return <Loader />;
   }
 
   return (
-    <section className="mt-12 pt-2 us:w-full">
+    <section className="my-12 py-2 us:w-full">
       <h2 className=" mb-8 text-center text-5xl font-bold tracking-widest text-[#2fceac] drop-shadow-[3px_1px_#5e8274]">
         USERS
       </h2>
@@ -50,7 +36,7 @@ function Users() {
           </tr>
         </thead>
         <tbody>
-          {users?.map((el) => (
+          {users?.map((el: IFormU) => (
             <tr
               key={el.id}
               className="font-medium tracking-wide odd:bg-[#2fceac]"

@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { axios } from '../../utils/axios/axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTransformedData } from '../../hooks/userTransform';
 
 export interface IForm {
   firstName: string;
@@ -15,6 +16,17 @@ type TToggle = {
 };
 
 function Form({ toggle, show }: TToggle) {
+  const queryClient = useQueryClient();
+  const [users, setUsers] = useTransformedData([]);
+
+  useQuery({
+    queryKey: ['users'],
+    queryFn: () => axios.get('/users.json').then((res) => res.data),
+    onSuccess: (data: any) => {
+      setUsers(data);
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -22,16 +34,19 @@ function Form({ toggle, show }: TToggle) {
     formState: { errors },
   } = useForm<IForm>();
 
-  const queryClient = useQueryClient();
-
   const mutation = useMutation({
     mutationFn: (user: IForm) => axios.post('/users.json', user),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
   });
 
   const onSubmitForm: SubmitHandler<IForm> = async (data) => {
+    const found = users.find((el: IForm) => el.email === data.email);
+    if (found) {
+      alert('User with this email is already active!');
+      reset();
+      return;
+    }
     mutation.mutate(data);
-    reset();
   };
 
   const handleShowUsers = () => {
@@ -39,7 +54,7 @@ function Form({ toggle, show }: TToggle) {
   };
 
   return (
-    <section className="h-auto w-[25rem] bg-[#2fceac] px-8 pt-12 font-medium tracking-wider xs:w-full ">
+    <section className="mt-32 w-[25rem] bg-[#2fceac] px-8 pt-12 font-medium tracking-wider xs:w-full ">
       <form
         onSubmit={handleSubmit(onSubmitForm)}
         autoComplete="off"
