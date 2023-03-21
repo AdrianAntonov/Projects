@@ -1,3 +1,5 @@
+import QueryProvider from './../libs/QueryProvider';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './globals.css';
 import { Lato } from 'next/font/google';
 
@@ -19,7 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lato.className}`}>{children}</body>
+      <QueryProvider>
+        <body className={`${lato.className}`}>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+        </body>
+      </QueryProvider>
     </html>
   );
 }
