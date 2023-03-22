@@ -24,7 +24,7 @@ export default function RootLayout({
       <QueryProvider>
         <body className={`${lato.className}`}>
           {children}
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </body>
       </QueryProvider>
     </html>

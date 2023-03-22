@@ -1,4 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+
+function withOpacity(variableName) {
+  return ({ opacityValue }) => {
+    if (opacityValue !== undefined) {
+      return `rgba(var(${variableName}), ${opacityValue})`;
+    }
+    return `rgb(var(${variableName}))`;
+  };
+}
+
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
@@ -12,6 +22,12 @@ module.exports = {
     extend: {
       fontFamily: {
         lato: ['var (--font-lato)'],
+      },
+      backgroundColor: {
+        skin: {
+          primary: withOpacity('--color-primary'),
+          a11y: withOpacity('--color-a11y'),
+        },
       },
     },
   },

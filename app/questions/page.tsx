@@ -1,6 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import QuestionCard from '@/components/QuestionCard';
 
 function QuestionsPage() {
   const searchParams = useSearchParams();
@@ -15,11 +16,14 @@ function QuestionsPage() {
       ).then((res) => res.json()),
   });
 
-  console.log(questions);
+  // console.log(questions && questions[0].id);
 
-  console.log(search);
-
-  return <h2 className="text-2xl">QuestionsPage</h2>;
+  return (
+    <section>
+      <h2 className="text-2xl">QuestionsPage</h2>
+      {questions && <QuestionCard questions={questions} />}
+    </section>
+  );
 }
 
 export default QuestionsPage;

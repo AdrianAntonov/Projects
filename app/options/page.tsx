@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { SelectCategories, SelectDifficulty } from '@/utils/SelectOpptions';
 
 type TData = {
   categories: string;
@@ -26,38 +27,53 @@ function OptionsPage() {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data: any, e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
+    console.log(data);
+    if (data.categories === '' || data.difficulty === '') {
+      reset();
+      return;
+    }
+
     router.push(
       `/questions?categories=${data.categories}&difficulty=${data.difficulty}`
     );
+    reset();
+    e.preventDefault();
+    e.stopPropagation();
     reset();
   };
 
   // TODO all options should be mapped from a separate component !!!
 
+  // console.log(
+  //   Object.keys(SelectCategories).map((item) => SelectCategories[item])
+  // );
+
   return (
     <section>
       <h2 className="text-2xl">OptionsPage</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register('categories')} multiple>
-          <option value="">Categories</option>
-          <option value="arts_and_literature">Arts & Literature</option>
-          <option value="film_and_tv">Film & Tv</option>
-          <option value="food_and_drink">Food & Drink</option>
-          <option value="general_knowledge">General Knowledge</option>
-          <option value="geography">Geography</option>
-          <option value="history">History</option>
-          <option value="music">Music</option>
-          <option value="science">Science</option>
-          <option value="society_and_culture">Society & Culture</option>
-          <option value="sport_and_leisure">Sport & Leisure</option>
+        <select {...register('categories')} className="italic">
+          {Object.keys(SelectCategories).map((item) => (
+            <option
+              key={item}
+              value={item}
+              className={item === '' ? 'italic' : 'not-italic'}
+            >
+              {SelectCategories[item]}
+            </option>
+          ))}
         </select>
-        <select {...register('difficulty')}>
-          <option value="">Diffculty</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
+
+        <select {...register('difficulty')} className="italic">
+          {Object.keys(SelectDifficulty).map((item) => (
+            <option
+              key={item}
+              value={item}
+              className={item === '' ? 'italic' : 'not-italic'}
+            >
+              {SelectDifficulty[item]}
+            </option>
+          ))}
         </select>
         <button type="submit">Go</button>
       </form>
