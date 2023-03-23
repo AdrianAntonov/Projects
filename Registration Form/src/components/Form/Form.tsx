@@ -106,7 +106,7 @@ function Form({ toggle, show }: TToggle) {
         <div className="flex justify-center ">
           <button
             type="submit"
-            className="form-btn mt-6 h-10 w-10/12 rounded-3xl xs:w-full xs:rounded-none xs:text-xs"
+            className="form-btn mt-6 h-10 w-10/12 rounded-full xs:w-full xs:rounded-none xs:text-xs"
           >
             SUBMIT
           </button>
@@ -114,7 +114,7 @@ function Form({ toggle, show }: TToggle) {
       </form>
       <div className="flex  items-center">
         <button
-          className="form-btn mb-6 h-10 w-full rounded-2xl xs:w-full xs:rounded-none xs:text-xs"
+          className="form-btn mb-6 h-10 w-full rounded-full xs:w-full xs:rounded-none xs:text-xs"
           onClick={handleShowUsers}
         >
           {show ? 'HIDE' : 'SHOW'} USERS

@@ -17,7 +17,7 @@ function Layout(props: {
     | undefined;
 }) {
   return (
-    <main className="flex h-[100vh] flex-col items-center justify-center bg-gradient-radial from-[#25362f] via-[#2e493e] to-[#385247]">
+    <main className="flex h-full flex-col items-center justify-center bg-gradient-radial from-[#25362f] via-[#2e493e] to-[#385247]">
       {props.children}
     </main>
   );
