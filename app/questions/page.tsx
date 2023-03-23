@@ -14,6 +14,7 @@ function QuestionsPage() {
       fetch(
         `https://the-trivia-api.com/api/questions?categories=${search[0]}&limit=5&difficulty=${search[1]}`
       ).then((res) => res.json()),
+    refetchOnWindowFocus: false,
   });
 
   // console.log(questions && questions[0].id);

@@ -36,7 +36,7 @@ function OptionsPage() {
     router.push(
       `/questions?categories=${data.categories}&difficulty=${data.difficulty}`
     );
-    reset();
+    // reset();
     e.preventDefault();
     e.stopPropagation();
     reset();
