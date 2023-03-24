@@ -1,12 +1,20 @@
 import QueryProvider from './../libs/QueryProvider';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import './globals.css';
-import { Lato } from 'next/font/google';
+import { Germania_One } from 'next/font/google';
 
-const lato = Lato({
+import './globals.css';
+// import { Lato } from 'next/font/google';
+import Navbar from '@/components/Navbar';
+
+// const lato = Lato({
+//   subsets: ['latin'],
+//   weight: ['400', '700', '900'],
+//   variable: '--font-lato',
+// });
+const Unif = Germania_One({
   subsets: ['latin'],
-  weight: ['400', '700', '900'],
-  variable: '--font-lato',
+  variable: '--font-Germania_One',
+  weight: '400',
 });
 
 export const metadata = {
@@ -22,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <QueryProvider>
-        <body className={`${lato.className}`}>
+        {/* <body className={`${lato.className} h-screen`}> */}
+        <body className={`${Unif.className} h-screen`}>
+          <Navbar />
           {children}
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </body>

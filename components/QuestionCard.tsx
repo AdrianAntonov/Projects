@@ -5,20 +5,19 @@
 //   id: number;
 // };
 'use client';
-import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import * as React from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 function QuestionCard(props: any) {
   const [questNum, setQuestNum] = useState(0);
   const [score, setScore] = useState(0);
   const [check, setCheck] = useState('');
+
+  const router = useRouter();
   // const [color, setColor] = useState('bg-red-400');
-  // const ref = useRef(false);
 
   const { questions } = props;
-  // console.log(questNum);
-
-  // React.useEffect(() => {}, [ref]);
 
   const arrShuflle = React.useMemo(() => {
     return questions[questNum]?.incorrectAnswers
@@ -27,29 +26,28 @@ function QuestionCard(props: any) {
   }, [questNum, questions]);
 
   const handleAnswer = (answer: string, correct: string) => {
-    if (answer === check) {
-      return;
-    }
-    if (answer === correct) {
-      console.log('CORRECT!');
-      setCheck(answer);
-      // setColor('bg-skin-primary');
-      // ref.current = true;
-      setScore((prev) => prev + 1);
-    } else {
-      console.log('WRONG!');
-      // setColor('bg-white');
-      // ref.current = true;
-    }
-    // if (questNum === questions.length - 1) {
-    //   alert('No more questions!');
+    // if (answer === check) {
     //   return;
+    // }
+    setCheck(answer);
+    // if (answer === correct) {
+    //   console.log('CORRECT!');
+    //   setCheck(answer);
+    // } else {
+    //   console.log('WRONG!');
+    //   setCheck(answer);
     // }
   };
 
   const toNextQuestion = () => {
+    if (questions[questNum]?.correctAnswer === check) {
+      setScore((prev) => prev + 1);
+    }
+    if (questNum === questions.length - 1) {
+      router.push('/result');
+    }
     setQuestNum((prev) => prev + 1);
-    // ref.current = false;
+    setCheck('');
   };
 
   // console.log(questNum);
@@ -62,17 +60,17 @@ function QuestionCard(props: any) {
         {arrShuflle?.map((question: any) => (
           <li
             key={question}
-            onClick={() =>
+            onClick={(e) =>
               handleAnswer(question, questions[questNum]?.correctAnswer)
             }
-            // className={color}
+            className={question === check ? 'bg-slate-300/70' : ''}
           >
             {question}
           </li>
         ))}
       </div>
 
-      <button type="button" onClick={toNextQuestion}>
+      <button type="button" onClick={toNextQuestion} disabled={check === ''}>
         NEXT
       </button>
     </div>
@@ -80,3 +78,8 @@ function QuestionCard(props: any) {
 }
 
 export default QuestionCard;
+
+// if (questNum === questions.length - 1) {
+//   alert('No more questions!');
+//   return;
+// }

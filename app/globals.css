@@ -108,3 +108,15 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  background-color: #66023c;
+  color: #f9f871;
+  /* color: #f5bf51; */
+  /* color: #ffe4f6; */
+  /* color: #00e0d1; */
+}

@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
-function withOpacity(variableName) {
-  return ({ opacityValue }) => {
-    if (opacityValue !== undefined) {
-      return `rgba(var(${variableName}), ${opacityValue})`;
-    }
-    return `rgb(var(${variableName}))`;
-  };
-}
+// function withOpacity(variableName) {
+//   return ({ opacityValue }) => {
+//     if (opacityValue !== undefined) {
+//       return `rgba(var(${variableName}), ${opacityValue})`;
+//     }
+//     return `rgb(var(${variableName}))`;
+//   };
+// }
 
 module.exports = {
   content: [
@@ -22,13 +22,15 @@ module.exports = {
     extend: {
       fontFamily: {
         lato: ['var (--font-lato)'],
+        UnifrakturMaguntia: ['var (--font-UnifrakturMaguntia)'],
+        Germania_One: ['var (--font-Germania_One)'],
       },
-      backgroundColor: {
-        skin: {
-          primary: withOpacity('--color-primary'),
-          a11y: withOpacity('--color-a11y'),
-        },
-      },
+      // backgroundColor: {
+      //   skin: {
+      //     primary: withOpacity('--color-primary'),
+      //     a11y: withOpacity('--color-a11y'),
+      //   },
+      // },
     },
   },
   plugins: [],
