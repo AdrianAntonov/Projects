@@ -50,32 +50,48 @@ function OptionsPage() {
 
   return (
     <section>
-      <h2 className="text-2xl">OptionsPage</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register('categories')} className="italic">
-          {Object.keys(SelectCategories).map((item) => (
-            <option
-              key={item}
-              value={item}
-              className={item === '' ? 'italic' : 'not-italic'}
-            >
-              {SelectCategories[item]}
-            </option>
-          ))}
-        </select>
-
-        <select {...register('difficulty')} className="italic">
-          {Object.keys(SelectDifficulty).map((item) => (
-            <option
-              key={item}
-              value={item}
-              className={item === '' ? 'italic' : 'not-italic'}
-            >
-              {SelectDifficulty[item]}
-            </option>
-          ))}
-        </select>
-        <button type="submit">Go</button>
+      {/* <h2 className="text-2xl">OptionsPage</h2> */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-slate-400 flex flex-col justify-center items-center"
+      >
+        <div className="text-gray-700">
+          <select
+            {...register('categories')}
+            className="italic w-96 tracking-wide outline-none text-3xl rounded-md"
+          >
+            {Object.keys(SelectCategories).map((item) => (
+              <option
+                key={item}
+                value={item}
+                className={
+                  item === ''
+                    ? 'italic text-gray-400 font-100'
+                    : 'not-italic text-xl'
+                }
+              >
+                {SelectCategories[item]}
+              </option>
+            ))}
+          </select>
+          <select
+            {...register('difficulty')}
+            className="italic ml-12 w-36 tracking-wide outline-none text-3xl rounded-sm"
+          >
+            {Object.keys(SelectDifficulty).map((item) => (
+              <option
+                key={item}
+                value={item}
+                className={item === '' ? 'italic' : 'not-italic text-xl'}
+              >
+                {SelectDifficulty[item]}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <button type="submit">Go</button>
+        </div>
       </form>
     </section>
   );
