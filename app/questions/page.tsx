@@ -17,11 +17,8 @@ function QuestionsPage() {
     refetchOnWindowFocus: false,
   });
 
-  // console.log(questions && questions[0].id);
-
   return (
-    <section>
-      {/* <h2 className="text-2xl">QuestionsPage</h2> */}
+    <section className="flex justify-center items-center h-screen">
       {questions && <QuestionCard questions={questions} />}
     </section>
   );

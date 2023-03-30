@@ -29,14 +29,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <QueryProvider>
-        {/* <body className={`${lato.className} h-screen`}> */}
-        <body className={`${germania_one.className} h-screen flex flex-col `}>
+      {/* <body className={`${lato.className} h-screen`}> */}
+      <body className={`${germania_one.className} h-screen flex flex-col `}>
+        <QueryProvider>
           <Navbar />
           {children}
-        </body>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-      </QueryProvider>
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryProvider>
+      </body>
     </html>
   );
 }

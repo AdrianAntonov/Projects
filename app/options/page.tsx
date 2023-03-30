@@ -78,11 +78,13 @@ function OptionsPage() {
             {difficultyOptions}
           </select>
         </div>
-        <div className="mt-72 w-56 text-4xl text-center rounded-3xl py-3 cursor-pointer outline-none shadow-[0px_12px_40px_#00000054] bg-[#0051AD] ">
-          <button type="submit" className=" ">
-            Go!
-          </button>
-        </div>
+
+        <button
+          type="submit"
+          className="mt-72 w-56 text-4xl text-center rounded-3xl py-3 cursor-pointer outline-none shadow-[0px_12px_40px_#00000054] bg-[#0051AD] "
+        >
+          Go!
+        </button>
       </form>
     </section>
   );

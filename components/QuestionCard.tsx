@@ -44,44 +44,48 @@ function QuestionCard(props: any) {
       setScore((prev) => prev + 1);
     }
     if (questNum === questions.length - 1) {
-      router.push('/result');
+      router.push(`/results?score=${score}&total=${questions.length}`);
     }
     setQuestNum((prev) => prev + 1);
     setCheck('');
   };
 
   // console.log(questNum);
-  return (
-    <section className="flex justify-center items-center">
-      {/* <h1>QuestionCard</h1> */}
-      {/* <div>Score: {score}</div> */}
-      <div className="bg-zinc-600 flex justify-center items-center flex-col">
-        <div>{questions[questNum]?.question}</div>
-        <div>
+
+  return !(questNum === questions.length) ? (
+    <section className="-mt-32 w-screen flex justify-center items-center">
+      <div className="bg-zinc-600 h-full flex justify-center items-center flex-col py-8 px-12 rounded-md w-7/12">
+        <div className="mb-10 text-4xl text-center">
+          {questions[questNum]?.question}
+        </div>
+        <div className="w-10/12 ml-auto">
           {arrShuflle?.map((question: any) => (
             <li
               key={question}
               onClick={(e) =>
                 handleAnswer(question, questions[questNum]?.correctAnswer)
               }
-              className={question === check ? 'bg-slate-300/70' : ''}
+              className={
+                question === check
+                  ? 'bg-cyan-800 list-none my-4 px-6 py-3 rounded-full text-xl w-10/12'
+                  : 'bg-indigo-600/70 list-none my-4 px-6 py-3 rounded-full text-xl w-10/12 hover:bg-slate-300/70'
+              }
             >
               {question}
             </li>
           ))}
         </div>
-        <div>
-          <button
-            type="button"
-            onClick={toNextQuestion}
-            disabled={check === ''}
-          >
-            NEXT
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={toNextQuestion}
+          disabled={check === ''}
+          className="ml-auto"
+        >
+          NEXT
+        </button>
       </div>
     </section>
-  );
+  ) : null;
 }
 
 export default QuestionCard;
