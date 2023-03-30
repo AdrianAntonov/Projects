@@ -11,7 +11,7 @@ import Navbar from '@/components/Navbar';
 //   weight: ['400', '700', '900'],
 //   variable: '--font-lato',
 // });
-const Unif = Germania_One({
+const germania_one = Germania_One({
   subsets: ['latin'],
   variable: '--font-Germania_One',
   weight: '400',
@@ -31,11 +31,11 @@ export default function RootLayout({
     <html lang="en">
       <QueryProvider>
         {/* <body className={`${lato.className} h-screen`}> */}
-        <body className={`${Unif.className} h-screen`}>
+        <body className={`${germania_one.className} h-screen flex flex-col `}>
           <Navbar />
           {children}
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </body>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
       </QueryProvider>
     </html>
   );

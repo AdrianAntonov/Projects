@@ -9,7 +9,7 @@ export default function Home() {
 
       <Link
         href="/options"
-        className="mt-36 px-14 py-3 bg-gradient-to-b from-[#92428e]   to-[#922c8d] hover:shadow-[0px_3px_12px_2px_#f9f971cf] rounded-full text-center text-2xl tracking-widest hover:-translate-y-[4px] duration-300 "
+        className="mt-36 px-14 py-3 bg-gradient-to-b from-[#92428e] to-[#922c8d] shadow-[0px_3px_12px_2px_#f9f971cf] rounded-full text-center text-2xl tracking-widest hover:translate-y-[4px] duration-300 hover:shadow-none"
       >
         START
       </Link>

@@ -52,28 +52,35 @@ function QuestionCard(props: any) {
 
   // console.log(questNum);
   return (
-    <div>
-      <h1>QuestionCard</h1>
-      <div>{score}</div>
-      <p>{questions[questNum]?.question}</p>
-      <div>
-        {arrShuflle?.map((question: any) => (
-          <li
-            key={question}
-            onClick={(e) =>
-              handleAnswer(question, questions[questNum]?.correctAnswer)
-            }
-            className={question === check ? 'bg-slate-300/70' : ''}
+    <section className="flex justify-center items-center">
+      {/* <h1>QuestionCard</h1> */}
+      {/* <div>Score: {score}</div> */}
+      <div className="bg-zinc-600 flex justify-center items-center flex-col">
+        <div>{questions[questNum]?.question}</div>
+        <div>
+          {arrShuflle?.map((question: any) => (
+            <li
+              key={question}
+              onClick={(e) =>
+                handleAnswer(question, questions[questNum]?.correctAnswer)
+              }
+              className={question === check ? 'bg-slate-300/70' : ''}
+            >
+              {question}
+            </li>
+          ))}
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={toNextQuestion}
+            disabled={check === ''}
           >
-            {question}
-          </li>
-        ))}
+            NEXT
+          </button>
+        </div>
       </div>
-
-      <button type="button" onClick={toNextQuestion} disabled={check === ''}>
-        NEXT
-      </button>
-    </div>
+    </section>
   );
 }
 
@@ -83,3 +90,6 @@ export default QuestionCard;
 //   alert('No more questions!');
 //   return;
 // }
+
+// gray Friends #554149
+// Matching Palette #007269

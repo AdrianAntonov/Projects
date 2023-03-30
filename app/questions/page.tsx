@@ -21,7 +21,7 @@ function QuestionsPage() {
 
   return (
     <section>
-      <h2 className="text-2xl">QuestionsPage</h2>
+      {/* <h2 className="text-2xl">QuestionsPage</h2> */}
       {questions && <QuestionCard questions={questions} />}
     </section>
   );
