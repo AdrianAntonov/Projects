@@ -54,7 +54,7 @@ function QuestionCard(props: any) {
 
   return !(questNum === questions.length) ? (
     <section className="-mt-32 w-screen flex justify-center items-center">
-      <div className="bg-zinc-600 h-full flex justify-center items-center flex-col py-8 px-12 rounded-md w-7/12">
+      <div className="bg-[#877179] h-full flex justify-center items-center flex-col py-8 px-12 rounded-md w-7/12">
         <div className="mb-10 text-4xl text-center">
           {questions[questNum]?.question}
         </div>
@@ -67,8 +67,8 @@ function QuestionCard(props: any) {
               }
               className={
                 question === check
-                  ? 'bg-cyan-800 list-none my-4 px-6 py-3 rounded-full text-xl w-10/12'
-                  : 'bg-indigo-600/70 list-none my-4 px-6 py-3 rounded-full text-xl w-10/12 hover:bg-slate-300/70'
+                  ? 'bg-[#00C9BA] list-none my-4 px-6 py-2 rounded-full text-xl w-10/12 cursor-pointer scale-105'
+                  : 'bg-indigo-600/70 list-none my-4 px-6 py-2 rounded-full text-xl w-10/12 hover:bg-slate-300/70 hover:cursor-pointer hover:scale-105 duration-300 hover:text-[#4a4a22cf]'
               }
             >
               {question}
@@ -79,7 +79,7 @@ function QuestionCard(props: any) {
           type="button"
           onClick={toNextQuestion}
           disabled={check === ''}
-          className="ml-auto"
+          className="ml-auto bg-[#0C5500] w-1/6 py-2 px-4 rounded-full text-xl tracking-widest"
         >
           NEXT
         </button>

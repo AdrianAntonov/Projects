@@ -67,13 +67,13 @@ function OptionsPage() {
         <div className="text-gray-700 flex justify-center items-center gap-10">
           <select
             {...register('categories')}
-            className="italic w-96 tracking-wide outline-none text-2xl rounded-md bg-[#EFEFDC] cursor-pointer shadow-[0px_12px_30px_#00000054]"
+            className="italic w-96 tracking-wide outline-none text-2xl rounded-md bg-[#f3f3e7] cursor-pointer shadow-[0px_12px_30px_#00000054]"
           >
             {categoryOptions}
           </select>
           <select
             {...register('difficulty')}
-            className="italic w-36 tracking-wide outline-none text-2xl rounded-md bg-[#EFEFDC] cursor-pointer shadow-[0px_12px_30px_#00000054]"
+            className="italic w-36 tracking-wide outline-none text-2xl rounded-md bg-[#f3f3e7] cursor-pointer shadow-[0px_12px_30px_#00000054]"
           >
             {difficultyOptions}
           </select>
@@ -81,7 +81,7 @@ function OptionsPage() {
 
         <button
           type="submit"
-          className="mt-72 w-56 text-4xl text-center rounded-3xl py-3 cursor-pointer outline-none shadow-[0px_12px_40px_#00000054] bg-[#0051AD] "
+          className="mt-72 w-56 text-4xl text-center rounded-3xl py-3 cursor-pointer outline-none shadow-[0px_12px_40px_#00000054] bg-[#0051AD] hover:scale-110 duration-300"
         >
           Go!
         </button>
