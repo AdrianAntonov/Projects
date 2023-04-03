@@ -32,7 +32,7 @@ function OptionsPage() {
           key={item}
           value={item}
           className={
-            item === '' ? 'italic text-gray-400 text-xl' : 'not-italic text-xl'
+            item === '' ? 'text-xl italic text-gray-400' : 'text-xl not-italic'
           }
         >
           {SelectCategories[item]}
@@ -48,7 +48,7 @@ function OptionsPage() {
           key={item}
           value={item}
           className={
-            item === '' ? 'italic text-gray-400 text-xl' : 'not-italic text-xl'
+            item === '' ? 'text-xl italic text-gray-400' : 'text-xl not-italic'
           }
         >
           {SelectDifficulty[item]}
@@ -58,22 +58,21 @@ function OptionsPage() {
   );
 
   return (
-    <section className="flex justify-center items-center">
-      {/* <h2 className="text-2xl">OptionsPage</h2> */}
+    <section className="flex items-center justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-40 w-5/6 flex flex-col justify-center items-center"
+        className="mt-40 flex w-5/6 flex-col items-center justify-center"
       >
-        <div className="text-gray-700 flex justify-center items-center gap-10">
+        <div className="flex items-center justify-center gap-10 text-gray-700">
           <select
             {...register('categories')}
-            className="italic w-96 tracking-wide outline-none text-2xl rounded-md bg-[#f3f3e7] cursor-pointer shadow-[0px_12px_30px_#00000054]"
+            className="w-96 cursor-pointer rounded-md bg-[#f3f3e7] text-2xl italic tracking-wide shadow-[0px_12px_30px_#00000054] outline-none"
           >
             {categoryOptions}
           </select>
           <select
             {...register('difficulty')}
-            className="italic w-36 tracking-wide outline-none text-2xl rounded-md bg-[#f3f3e7] cursor-pointer shadow-[0px_12px_30px_#00000054]"
+            className="w-36 cursor-pointer rounded-md bg-[#f3f3e7] text-2xl italic tracking-wide shadow-[0px_12px_30px_#00000054] outline-none"
           >
             {difficultyOptions}
           </select>
@@ -81,7 +80,7 @@ function OptionsPage() {
 
         <button
           type="submit"
-          className="mt-72 w-56 text-4xl text-center rounded-3xl py-3 cursor-pointer outline-none shadow-[0px_12px_40px_#00000054] bg-[#0051AD] hover:scale-110 duration-300"
+          className="mt-72 w-56 cursor-pointer rounded-3xl bg-[#0051AD] py-3 text-center text-4xl shadow-[0px_12px_40px_#00000054] outline-none duration-300  hover:scale-110"
         >
           Go!
         </button>

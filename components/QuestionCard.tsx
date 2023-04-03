@@ -26,17 +26,7 @@ function QuestionCard(props: any) {
   }, [questNum, questions]);
 
   const handleAnswer = (answer: string, correct: string) => {
-    // if (answer === check) {
-    //   return;
-    // }
     setCheck(answer);
-    // if (answer === correct) {
-    //   console.log('CORRECT!');
-    //   setCheck(answer);
-    // } else {
-    //   console.log('WRONG!');
-    //   setCheck(answer);
-    // }
   };
 
   const toNextQuestion = () => {
@@ -53,12 +43,12 @@ function QuestionCard(props: any) {
   // console.log(questNum);
 
   return !(questNum === questions.length) ? (
-    <section className="-mt-32 w-screen flex justify-center items-center">
-      <div className="bg-[#877179] h-full flex justify-center items-center flex-col py-8 px-12 rounded-md w-7/12">
-        <div className="mb-10 text-4xl text-center">
+    <section className="-mt-32 flex w-screen items-center justify-center">
+      <div className="flex h-full w-7/12 flex-col items-center justify-center rounded-md bg-[#e38a467f] py-8 px-12 shadow-xl">
+        <div className="mb-10 text-center text-4xl">
           {questions[questNum]?.question}
         </div>
-        <div className="w-10/12 ml-auto">
+        <div className="ml-auto w-10/12">
           {arrShuflle?.map((question: any) => (
             <li
               key={question}
@@ -67,8 +57,8 @@ function QuestionCard(props: any) {
               }
               className={
                 question === check
-                  ? 'bg-[#00C9BA] list-none my-4 px-6 py-2 rounded-full text-xl w-10/12 cursor-pointer scale-105'
-                  : 'bg-indigo-600/70 list-none my-4 px-6 py-2 rounded-full text-xl w-10/12 hover:bg-slate-300/70 hover:cursor-pointer hover:scale-105 duration-300 hover:text-[#4a4a22cf]'
+                  ? 'my-4 w-10/12 scale-105 cursor-pointer list-none rounded-full bg-[#00978d] px-6 py-2 text-xl'
+                  : 'my-4 w-10/12 list-none rounded-full bg-indigo-600/70 px-6 py-2 text-xl duration-300 hover:scale-105 hover:cursor-pointer hover:bg-slate-300/70 hover:text-[#2e2e15cf]'
               }
             >
               {question}
@@ -79,7 +69,7 @@ function QuestionCard(props: any) {
           type="button"
           onClick={toNextQuestion}
           disabled={check === ''}
-          className="ml-auto bg-[#0C5500] w-1/6 py-2 px-4 rounded-full text-xl tracking-widest"
+          className="ml-auto w-1/6 rounded-full bg-[#0C5500] py-2 px-4 text-xl tracking-widest shadow-xl duration-300 hover:scale-90 hover:shadow-none "
         >
           NEXT
         </button>
