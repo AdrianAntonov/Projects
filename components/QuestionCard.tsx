@@ -1,6 +1,6 @@
-"use client";
-import * as React from "react";
-import { useRouter } from "next/navigation";
+'use client';
+import * as React from 'react';
+import { useRouter } from 'next/navigation';
 
 type TQuestionCard = {
   correctAnswer: string;
@@ -16,27 +16,32 @@ interface Props {
 const QuestionCard: React.FC<Props> = ({ items }) => {
   const [step, setStep] = React.useState(0);
   const [score, setScore] = React.useState(0);
-  const [check, setCheck] = React.useState("");
+  const [check, setCheck] = React.useState('');
 
   const router = useRouter();
 
   React.useEffect(() => {
-    if (localStorage.getItem("check")) {
-      setCheck(localStorage.getItem("check") as string);
+    if (localStorage.getItem('check')) {
+      console.log('check1');
+      setCheck(localStorage.getItem('check') as string);
     }
 
-    if (localStorage.getItem("step")) {
-      setStep(parseInt(localStorage.getItem("step") as string));
+    if (localStorage.getItem('step')) {
+      console.log('step');
+      setStep(parseInt(localStorage.getItem('step') as string));
     }
   }, []);
 
   React.useEffect(() => {
-    localStorage.setItem("check", check);
-    localStorage.setItem("step", step.toString());
+    console.log('check2');
+    localStorage.setItem('check', check);
+    localStorage.setItem('step', step.toString());
   }, [check, step]);
 
   const arrShuflle = React.useMemo(() => {
-    return items[step]?.incorrectAnswers.concat(items[step]?.correctAnswer);
+    return items[step]?.incorrectAnswers
+      .concat(items[step]?.correctAnswer)
+      ?.sort(() => Math.random() - 0.5);
     // ?.sort(() => Math.random() - 0.5); // This is random sorting, not keep items static
   }, [step, items]);
 
@@ -45,7 +50,7 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
       setScore((prev) => prev + 1);
     }
 
-    setCheck("");
+    setCheck('');
 
     if (step === items.length - 1) {
       setStep(0);
@@ -73,8 +78,8 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
               onClick={() => setCheck(question)}
               className={
                 question === check
-                  ? "my-4 w-10/12 scale-105 cursor-pointer list-none rounded-full bg-[#00978d] px-6 py-2 text-xl"
-                  : "my-4 w-10/12 list-none rounded-full bg-indigo-600/70 px-6 py-2 text-xl duration-300 hover:scale-105 hover:cursor-pointer hover:bg-slate-300/70  hover:text-[#2e2e15cf]"
+                  ? 'my-4 w-10/12 scale-105 cursor-pointer list-none rounded-full bg-[#00978d] px-6 py-2 text-xl'
+                  : 'my-4 w-10/12 list-none rounded-full bg-indigo-600/70 px-6 py-2 text-xl duration-300 hover:scale-105 hover:cursor-pointer hover:bg-slate-300/70  hover:text-[#2e2e15cf]'
               }
             >
               {question}
@@ -84,7 +89,7 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
         <button
           type="button"
           onClick={toNextQuestion}
-          disabled={check === ""}
+          disabled={check === ''}
           className="ml-auto w-1/6 rounded-full bg-[#0C5500] py-2 px-4 text-xl tracking-widest shadow-xl duration-300 hover:scale-90 hover:shadow-none "
         >
           NEXT

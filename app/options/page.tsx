@@ -11,7 +11,7 @@ function OptionsPage() {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data: any, e: any) => {
-    console.log(data);
+    // console.log(data);
     if (data.categories === '' || data.difficulty === '') {
       reset();
       return;
