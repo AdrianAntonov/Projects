@@ -5,9 +5,10 @@ function Navbar() {
   const router = useRouter();
 
   const clearLocalStorage = () => {
-    window.localStorage.removeItem('search');
-    window.localStorage.removeItem('totalQuestions');
-    window.localStorage.removeItem('questionNumber');
+    window.localStorage.clear();
+    // window.localStorage.removeItem('search');
+    // window.localStorage.removeItem('totalQuestions');
+    // window.localStorage.removeItem('questionNumber');
     router.push('/');
   };
 

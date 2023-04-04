@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* <body className={`${lato.className} h-screen`}> */}
-      <body className={`${germania_one.className} h-screen flex flex-col `}>
+      <body className={`${germania_one.className} flex h-screen flex-col `}>
         <QueryProvider>
           <Navbar />
           {children}

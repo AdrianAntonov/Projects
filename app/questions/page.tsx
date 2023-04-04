@@ -20,17 +20,17 @@ function QuestionsPage() {
     queryKey: ['questions'],
     queryFn: () =>
       fetch(
-        `https://the-trivias-api.com/api/questions?categories=${search[0]}&limit=5&difficulty=${search[1]}`
+        `https://the-trivia-api.com/api/questions?categories=${search[0]}&limit=5&difficulty=${search[1]}`
       ).then((res) => res.json()),
     refetchOnWindowFocus: false,
     // refetchOnMount: false,
     onSuccess: (data) => {
-      window.localStorage.setItem('search', JSON.stringify(search));
       window.localStorage.setItem('totalQuestions', JSON.stringify(data));
+      window.localStorage.setItem('search', JSON.stringify(search));
       window.localStorage.setItem('questionNumber', JSON.stringify(0));
     },
-    onError: (error) => alert(error),
-    enabled: items === null,
+    // onError: (error) => alert(error),
+    // enabled: items === null,
   });
 
   return (
