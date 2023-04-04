@@ -10,7 +10,7 @@ function Results() {
   console.log(search);
 
   return (
-    <div className="h-full flex justify-center items-center">
+    <div className="flex h-full items-center justify-center  ">
       <h1 className="-mt-36 text-6xl">
         {`Your score is ${search[0]}/${search[1]}`}
       </h1>

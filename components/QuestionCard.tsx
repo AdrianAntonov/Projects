@@ -7,17 +7,36 @@
 'use client';
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
-function QuestionCard(props: any) {
-  const [questNum, setQuestNum] = useState(0);
-  const [score, setScore] = useState(0);
-  const [check, setCheck] = useState('');
+type TQuestionCard = {
+  correctAnswer: string;
+  incorrectAnswers: string[];
+  question: string;
+  id: number;
+};
+
+function QuestionCard() {
+  const [questNum, setQuestNum] = React.useState(0);
+  const [score, setScore] = React.useState(0);
+  const [check, setCheck] = React.useState('');
+  const [questions, setQuestions] = React.useState<TQuestionCard[]>([]);
+  const [questionNum, setQuestionNum] = React.useState();
 
   const router = useRouter();
-  // const [color, setColor] = useState('bg-red-400');
 
-  const { questions } = props;
+  // const { questions } = props;
+
+  React.useEffect(() => {
+    const searchParams = window.localStorage.getItem('search');
+    const questionsParams = window.localStorage.getItem('totalQuestions');
+    if (questionsParams?.length) {
+      setQuestions(JSON.parse(questionsParams));
+    }
+    return () => {
+      window.localStorage.removeItem('search');
+      window.localStorage.removeItem('totalQuestions');
+    };
+  }, []);
 
   const arrShuflle = React.useMemo(() => {
     return questions[questNum]?.incorrectAnswers
@@ -58,7 +77,7 @@ function QuestionCard(props: any) {
               className={
                 question === check
                   ? 'my-4 w-10/12 scale-105 cursor-pointer list-none rounded-full bg-[#00978d] px-6 py-2 text-xl'
-                  : 'my-4 w-10/12 list-none rounded-full bg-indigo-600/70 px-6 py-2 text-xl duration-300 hover:scale-105 hover:cursor-pointer hover:bg-slate-300/70 hover:text-[#2e2e15cf]'
+                  : 'my-4 w-10/12 list-none rounded-full bg-indigo-600/70 px-6 py-2 text-xl duration-300 hover:scale-105 hover:cursor-pointer hover:bg-slate-300/70  hover:text-[#2e2e15cf]'
               }
             >
               {question}

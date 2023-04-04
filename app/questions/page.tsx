@@ -9,22 +9,12 @@ function QuestionsPage() {
 
   const search = Array.from(searchParams.values());
 
-  const [questions, setQuestions] = React.useState([]);
-
   React.useEffect(() => {
     // if (window.localStorage.getItem('questions') === null)
-    window.localStorage.setItem('questions', JSON.stringify(search));
-
-    return () => {
-      window.localStorage.removeItem('questions');
-    };
+    window.localStorage.setItem('search', JSON.stringify(search));
   }, [search]);
 
-  // console.log(window.localStorage.getItem('questions'));
-  // console.log(JSON.stringify(search));
-  // console.log(questions);
-  // const { data: questions } = useQuery({
-  useQuery({
+  const { data: questions } = useQuery({
     queryKey: ['questions'],
     queryFn: () =>
       fetch(
@@ -33,16 +23,19 @@ function QuestionsPage() {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     onSuccess: (data) => {
-      console.log(data);
-      setQuestions(data);
+      // console.log(data);
+      // setQuestions(data);
+      window.localStorage.setItem('totalQuestions', JSON.stringify(data));
     },
-    enabled:
-      window.localStorage.getItem('questions') !== JSON.stringify(search),
+    // enabled:
+    //   window.localStorage.getItem('localStorageQuestions') !==
+    //   JSON.stringify(search),
   });
 
   return (
     <section className="flex h-screen items-center justify-center">
-      {questions && <QuestionCard questions={questions} />}
+      {/* {questions && <QuestionCard questions={questions} />} */}
+      {questions && <QuestionCard />}
     </section>
   );
 }
