@@ -5,10 +5,7 @@ function Navbar() {
   const router = useRouter();
 
   const clearLocalStorage = () => {
-    window.localStorage.clear();
-    // window.localStorage.removeItem('search');
-    // window.localStorage.removeItem('totalQuestions');
-    // window.localStorage.removeItem('questionNumber');
+    globalThis.localStorage.clear();
     router.push('/');
   };
 
