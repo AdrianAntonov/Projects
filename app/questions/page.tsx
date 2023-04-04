@@ -9,27 +9,28 @@ function QuestionsPage() {
 
   const search = Array.from(searchParams.values());
 
-  React.useEffect(() => {
-    // if (window.localStorage.getItem('questions') === null)
-    window.localStorage.setItem('search', JSON.stringify(search));
-  }, [search]);
+  const items = window.localStorage.getItem('totalQuestions');
+
+  // React.useEffect(() => {
+  //   // if (window.localStorage.getItem('questions') === null)
+  //   window.localStorage.setItem('search', JSON.stringify(search));
+  // }, [search]);
 
   const { data: questions } = useQuery({
     queryKey: ['questions'],
     queryFn: () =>
       fetch(
-        `https://the-trivia-api.com/api/questions?categories=${search[0]}&limit=5&difficulty=${search[1]}`
+        `https://the-trivias-api.com/api/questions?categories=${search[0]}&limit=5&difficulty=${search[1]}`
       ).then((res) => res.json()),
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    // refetchOnMount: false,
     onSuccess: (data) => {
-      // console.log(data);
-      // setQuestions(data);
+      window.localStorage.setItem('search', JSON.stringify(search));
       window.localStorage.setItem('totalQuestions', JSON.stringify(data));
+      window.localStorage.setItem('questionNumber', JSON.stringify(0));
     },
-    // enabled:
-    //   window.localStorage.getItem('localStorageQuestions') !==
-    //   JSON.stringify(search),
+    onError: (error) => alert(error),
+    enabled: items === null,
   });
 
   return (
