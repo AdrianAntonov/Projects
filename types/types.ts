@@ -15,9 +15,9 @@ const enum EData {
   society_and_culture = 'society_and_culture',
   sport_and_leisure = 'sport_and_leisure',
 }
-// type TQuestionCard = {
-//   correctAnswer: string;
-//   incorrectAnswers: string[];
-//   question: string;
-//   id: number;
-// };
+export type QuestionCardType = {
+  correctAnswer: string;
+  incorrectAnswers: string[];
+  question: string;
+  id: number;
+};

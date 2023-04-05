@@ -1,6 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
+import ShuffleArray from '@/utils/ShuffleArray';
 
 type TQuestionCard = {
   correctAnswer: string;
@@ -17,6 +18,7 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
   const [step, setStep] = React.useState(0);
   const [score, setScore] = React.useState(0);
   const [check, setCheck] = React.useState('');
+  const [results, setResults] = React.useState([]);
 
   const router = useRouter();
 
@@ -30,13 +32,27 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
       console.log('step');
       setStep(parseInt(localStorage.getItem('step') as string));
     }
+
+    if (localStorage.getItem('results')) {
+      setResults(localStorage.getItem('results'));
+    }
   }, []);
 
   React.useEffect(() => {
     console.log('check2');
     localStorage.setItem('check', check);
     localStorage.setItem('step', step.toString());
-  }, [check, step]);
+    localStorage.setItem('results', results as unknown as string);
+  }, [check, results, step]);
+
+  React.useEffect(() => {
+    const result = ShuffleArray(
+      items[step]?.incorrectAnswers.concat(items[step]?.correctAnswer)
+    );
+    setResults(result);
+  }, [items, step]);
+
+  console.log(results);
 
   const arrShuflle = React.useMemo(() => {
     return items[step]?.incorrectAnswers
@@ -72,7 +88,7 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
           {items[step]?.question}
         </div>
         <div className="ml-auto w-10/12">
-          {arrShuflle?.map((question: any) => (
+          {results?.map((question: any) => (
             <li
               key={question}
               onClick={() => setCheck(question)}
