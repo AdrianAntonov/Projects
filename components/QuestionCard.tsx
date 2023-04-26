@@ -18,7 +18,7 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
   const [step, setStep] = React.useState(0);
   const [score, setScore] = React.useState(0);
   const [check, setCheck] = React.useState('');
-  const [results, setResults] = React.useState([]);
+  const [results, setResults] = React.useState<string[]>([]);
 
   const router = useRouter();
 
@@ -33,8 +33,8 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
       setStep(parseInt(localStorage.getItem('step') as string));
     }
 
-    if (localStorage.getItem('results')) {
-      setResults(localStorage.getItem('results'));
+    if (localStorage.getItem('results') !== null) {
+      setResults(JSON.parse(localStorage.getItem('results')!));
     }
   }, []);
 
@@ -42,13 +42,15 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
     console.log('check2');
     localStorage.setItem('check', check);
     localStorage.setItem('step', step.toString());
-    localStorage.setItem('results', results as unknown as string);
+    localStorage.setItem('results', JSON.stringify(results));
   }, [check, results, step]);
 
   React.useEffect(() => {
-    const result = ShuffleArray(
-      items[step]?.incorrectAnswers.concat(items[step]?.correctAnswer)
-    );
+    //  huffleArrSay(
+    const result = items[step]?.incorrectAnswers
+      .concat(items[step]?.correctAnswer)
+      ?.sort();
+    // );
     setResults(result);
   }, [items, step]);
 
