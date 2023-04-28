@@ -1,7 +1,6 @@
 'use client';
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import ShuffleArray from '@/utils/ShuffleArray';
 
 type TQuestionCard = {
   correctAnswer: string;
@@ -24,44 +23,46 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
 
   React.useEffect(() => {
     if (localStorage.getItem('check')) {
-      console.log('check1');
+      // console.log('check1');
       setCheck(localStorage.getItem('check') as string);
     }
 
+    if (localStorage.getItem('score')) {
+      // console.log('check1');
+      setScore(Number(localStorage.getItem('score')));
+    }
+
     if (localStorage.getItem('step')) {
-      console.log('step');
+      // console.log('step');
       setStep(parseInt(localStorage.getItem('step') as string));
     }
 
-    if (localStorage.getItem('results') !== null) {
+    if (localStorage.getItem('results') === undefined) {
+      setResults([]);
+    } else {
       setResults(JSON.parse(localStorage.getItem('results')!));
     }
   }, []);
 
   React.useEffect(() => {
-    console.log('check2');
+    // console.log('check2');
     localStorage.setItem('check', check);
+    localStorage.setItem('score', JSON.stringify(score));
     localStorage.setItem('step', step.toString());
     localStorage.setItem('results', JSON.stringify(results));
-  }, [check, results, step]);
+  }, [check, results, step, score]);
 
   React.useEffect(() => {
-    //  huffleArrSay(
     const result = items[step]?.incorrectAnswers
       .concat(items[step]?.correctAnswer)
       ?.sort();
-    // );
-    setResults(result);
+
+    if (!result) {
+      setResults([]);
+    } else {
+      setResults(result);
+    }
   }, [items, step]);
-
-  console.log(results);
-
-  const arrShuflle = React.useMemo(() => {
-    return items[step]?.incorrectAnswers
-      .concat(items[step]?.correctAnswer)
-      ?.sort(() => Math.random() - 0.5);
-    // ?.sort(() => Math.random() - 0.5); // This is random sorting, not keep items static
-  }, [step, items]);
 
   const toNextQuestion = () => {
     if (items[step]?.correctAnswer === check) {
@@ -69,11 +70,11 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
     }
 
     setCheck('');
-
+    console.log(score);
     if (step === items.length - 1) {
-      setStep(0);
-      setScore(0);
-      router.push(`/results?score=${score}&total=${items.length}`);
+      router.push(`/results?total=${items.length}`);
+      // setStep(0);
+      // setScore(0);
     } else {
       setStep((i) => i + 1);
     }
@@ -108,13 +109,16 @@ const QuestionCard: React.FC<Props> = ({ items }) => {
           type="button"
           onClick={toNextQuestion}
           disabled={check === ''}
-          className="ml-auto w-1/6 rounded-full bg-[#0C5500] py-2 px-4 text-xl tracking-widest shadow-xl duration-300 hover:scale-90 hover:shadow-none "
+          className="ml-auto w-1/6 cursor-pointer rounded-full bg-[#0C5500] py-2 px-4 text-xl tracking-widest shadow-xl duration-300 hover:scale-90 hover:shadow-none active:bg-[#1cd000]"
         >
           NEXT
         </button>
       </div>
+      <div className="h-8 w-8 text-xl">{score}</div>
     </section>
-  ) : null;
+  ) : (
+    <h3 className="-mt-80 text-xl">Please choose another category</h3>
+  );
 };
 
 export default QuestionCard;

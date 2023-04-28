@@ -19,7 +19,7 @@ function QuestionsPage() {
   }, []);
 
   const { data: questions } = useQuery({
-    queryKey: ['questions'],
+    queryKey: ['questions', search[0], search[1]],
     queryFn: () =>
       fetch(
         `https://the-trivia-api.com/api/questions?categories=${search[0]}&limit=5&difficulty=${search[1]}`
@@ -36,7 +36,7 @@ function QuestionsPage() {
     // onError: (error) => alert(error),
     // enabled: items === null,
   });
-
+  console.log(questions);
   return (
     <section className="flex h-screen items-center justify-center">
       <QuestionCard items={items} />

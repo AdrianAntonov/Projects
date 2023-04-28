@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { SelectCategories, SelectDifficulty } from '@/utils/SelectOpptions';
 
 function OptionsPage() {
@@ -11,7 +11,6 @@ function OptionsPage() {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data: any, e: any) => {
-    // console.log(data);
     if (data.categories === '' || data.difficulty === '') {
       reset();
       return;
@@ -32,7 +31,9 @@ function OptionsPage() {
           key={item}
           value={item}
           className={
-            item === '' ? 'text-xl italic text-gray-400' : 'text-xl not-italic'
+            item === ''
+              ? 'text-xl italic text-gray-400'
+              : 'cursor-pointer text-xl not-italic'
           }
         >
           {SelectCategories[item]}
@@ -48,7 +49,9 @@ function OptionsPage() {
           key={item}
           value={item}
           className={
-            item === '' ? 'text-xl italic text-gray-400' : 'text-xl not-italic'
+            item === ''
+              ? 'text-xl italic text-gray-400'
+              : 'cursor-pointer text-xl not-italic'
           }
         >
           {SelectDifficulty[item]}
@@ -80,7 +83,7 @@ function OptionsPage() {
 
         <button
           type="submit"
-          className="mt-72 w-56 cursor-pointer rounded-3xl bg-[#0051AD] py-3 text-center text-4xl shadow-[0px_12px_40px_#00000054] outline-none duration-300  hover:scale-110"
+          className="mt-72 w-56 cursor-pointer rounded-3xl bg-[#0051AD] py-3 text-center text-4xl shadow-[0px_12px_40px_#00000054] duration-300 hover:scale-110"
         >
           Go!
         </button>

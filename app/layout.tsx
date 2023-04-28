@@ -22,6 +22,9 @@ export const metadata = {
   description: 'Amazing Quiz Application',
 };
 
+{
+  /* <Navbar /> */
+}
 export default function RootLayout({
   children,
 }: {
@@ -32,7 +35,7 @@ export default function RootLayout({
       {/* <body className={`${lato.className} h-screen`}> */}
       <body className={`${germania_one.className} flex h-screen flex-col `}>
         <QueryProvider>
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </QueryProvider>
